@@ -9,6 +9,7 @@
 /*   Updated: 2024/12/14 06:59:13 by begiovan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {
@@ -21,18 +22,18 @@ int	ft_atoi(const char *str)
 	{
 		str++;
 	}
-	if(*str == '-' || *str == '+')
+	if (*str == '-' || *str == '+')
 	{
-		if(*str == '-')
+		if (*str == '-')
 		{
 			s *= -1;
 		}
 		str++;
 	}
-	while(*str >= '0' && *str <= '9')
+	while (*str >= '0' && *str <= '9')
 	{
 		v = v * 10 + (*str - '0');
 		str++;
 	}
-	return(s * v);
+	return (s * v);
 }

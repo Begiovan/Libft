@@ -9,10 +9,11 @@
 /*   Updated: 2024/12/10 10:40:51 by begiovan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
 int	ft_tolower(int i)
 {
-	if(i >= 'A' && i <= 'Z')
-		return(i + 32);
-	return(0);
+	if (i >= 'A' && i <= 'Z')
+		return (i + 32);
+	return (i);
 }

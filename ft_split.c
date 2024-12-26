@@ -1,116 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: begiovan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/20 18:59:44 by begiovan          #+#    #+#             */
+/*   Updated: 2024/12/20 19:00:16 by begiovan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include "libft.h"
 #include <stdlib.h>
-#include <string.h>
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
-{
-	if(!src)
-	{
-		return(0);
-	}
-
-	if(!dest && size > 0)
-	{
-		return(0);
-	}
-	
-	if(size == 0)
-	{
-		return(strlen(src));
-	}
-
-	while(size > 0 && *src != '\0')
-	{
-		*dest = *src;
-		size--;
-		dest++;
-		src++;
-	}
-
-	*dest = '\0';
-
-	return(strlen(src));
-}
-
-int	row_count(const char *c, char d)
+int	row_count(const char *s, char d)
 {
 	int	count;
-	int	dim;
+	int	in_word;
 
 	count = 0;
-	while(*c != '\0')
+	in_word = 0;
+	while (*s)
 	{
-		dim = 0;
-		while(*c == d && *c != '\0')
+		if (*s == d)
+			in_word = 0;
+		else if (!in_word)
 		{
-			c++;
-		}
-		while(*c != d && *c != '\0')
-		{
-			dim++;
-			c++;
-		}
-		if(dim > 0)
-		{
+			in_word = 1;
 			count++;
 		}
+		s++;
 	}
-	return(count);
+	return (count);
 }
 
-void	col_create(const char *c, char d, char **m)
+void	col_create(const char *s, char d, char **m)
 {
-	int	dim;
-	int	i;
+	int			dim;
+	int			i;
+	const char	*start;
 
 	i = 0;
-	while(*c != '\0')
+	while (*s)
 	{
-		dim = 0;
-		while(*c == d && *c != '\0')
-		{
-			c++;
-		}
-		while(*c != d && *c != '\0')
-		{
-			dim++;
-			c++;
-		}
-		if(dim > 0)
-		{
-			m[i] = (char *)malloc((dim + 1) * sizeof(char));
-			ft_strlcpy(m[i], (c - dim), dim);
-			i++;
-		}
+		while (*s == d && *s != '\0')
+			s++;
+		if (*s == '\0')
+			break ;
+		start = s;
+		while (*s != d && *s != '\0')
+			s++;
+		dim = s - start;
+		m[i] = (char *)malloc((dim + 1) * sizeof(char));
+		if (m[i] == NULL)
+			return ;
+		ft_strlcpy(m[i], start, dim + 1);
+		i++;
 	}
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**mat;
-	int	row;
+	int		row;
 
-	row = row_count(s ,c);
+	if (s == NULL)
+		return (NULL);
+	row = row_count(s, c);
 	mat = (char **)malloc((row + 1) * sizeof(char *));
-	if(mat == NULL)
-		return(NULL);
+	if (mat == NULL)
+		return (NULL);
 	mat[row] = NULL;
 	col_create(s, c, mat);
-	return(mat);
-}
-
-#include <stdio.h>
-
-int main()
-{
-	int	i = 0;
-	char	*s = ",,,,marco,,ciao,,prova";
-	char	c = ',';
-	char	**matrix = ft_split(s, c);
-
-	while(matrix[i] != NULL)
-	{
-		printf("%s\n", matrix[i]);
-		i ++;
-	}
-	return(0);
+	return (mat);
 }

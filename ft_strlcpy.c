@@ -9,33 +9,29 @@
 /*   Updated: 2024/12/14 07:04:49 by begiovan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+#include <stdlib.h>
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	if(!src)
-	{
-		return(0);
-	}
+	size_t	src_len;
 
-	if(!dest && size > 0)
+	if (!src || !dest)
 	{
-		return(0);
+		return (0);
 	}
-	
-	if(size == 0)
+	src_len = ft_strlen((char *)src);
+	if (size == 0)
 	{
-		return(ft_strlen(src));
+		return (src_len);
 	}
-
-	while(size > 0 && *src != '\0')
+	while (size > 1 && *src != '\0')
 	{
 		*dest = *src;
-		size--;
 		dest++;
 		src++;
+		size--;
 	}
-
 	*dest = '\0';
-
-	return(ft_strlen(src));
+	return (src_len);
 }

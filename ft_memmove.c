@@ -9,24 +9,31 @@
 /*   Updated: 2024/12/14 07:04:02 by begiovan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
-#include <stdio.h>
+#include "libft.h"
+#include <stdlib.h>
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	*d;
+	char		*d;
 	const char	*s;
 
 	d = (char *)dest;
 	s = (const char *)src;
-
-	while(n > 0)
+	if (d < s || d >= s + n)
 	{
-		*d = *s;
-		d++;
-		s++;
-		n--;
+		while (n--)
+		{
+			*d++ = *s++;
+		}
 	}
-	return(dest);
+	else
+	{
+		d += n;
+		s += n;
+		while (n--)
+		{
+			*(--d) = *(--s);
+		}
+	}
+	return (dest);
 }

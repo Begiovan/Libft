@@ -9,11 +9,12 @@
 /*   Updated: 2024/12/09 15:51:17 by begiovan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-int	isascii(int i)
+int	ft_isascii(int i)
 {
-	if(0 <= i && i <= 127)
-		return(0);
+	if (0 <= i && i <= 127)
+		return (1);
 	else
-		return(1);
+		return (0);
 }

@@ -9,16 +9,17 @@
 /*   Updated: 2024/12/14 07:02:38 by begiovan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+#include <stdlib.h>
 
 void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*a;
 
 	a = (unsigned char *)s;
-
-	while(n > 0)
+	while (n > 0)
 	{
-		a = '\0';
+		*a = '\0';
 		a++;
 		n--;
 	}

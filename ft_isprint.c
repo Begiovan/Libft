@@ -6,18 +6,19 @@
 /*   By: begiovan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:54:42 by begiovan          #+#    #+#             */
-/*   Updated: 2024/12/14 08:49:17 by begiovan         ###   ########.fr       */
+/*   Updated: 2024/12/23 11:12:57 by begiovan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
 int	ft_isprint(int i)
 {
-	if(32 <= i && i <= 126)
+	if (32 <= i && i <= 126)
 	{
-		return(0);
+		return (1);
 	}
 	else
 	{
-		return(1);
+		return (0);
 	}
 }

@@ -1,35 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: begiovan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 11:20:06 by begiovan          #+#    #+#             */
-/*   Updated: 2024/12/23 11:20:08 by begiovan         ###   ########.fr       */
+/*   Created: 2024/12/23 11:13:51 by begiovan          #+#    #+#             */
+/*   Updated: 2024/12/23 11:14:17 by begiovan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-#include <unistd.h>
+#include <stdlib.h>
 
-void	ft_putnbr_fd(int n, int fd)
+static int	count_size(int n)
 {
-	char	c;
+	int	count;
 
-	if (n == -2147483648)
+	count = 0;
+	if (n <= 0)
+		count = 1;
+	while (n != 0)
 	{
-		write(fd, "-2147483648", 11);
-		return ;
+		n /= 10;
+		count++;
+	}
+	return (count);
+}
+
+char	*ft_itoa(int n)
+{
+	int				len;
+	char			*str;
+	unsigned int	num;
+
+	len = count_size(n);
+	str = malloc(len + 1);
+	if (!str)
+		return (NULL);
+	if (n < 0)
+		num = -n;
+	else
+		num = n;
+	str[len] = '\0';
+	while (len > 0)
+	{
+		str[--len] = (num % 10) + '0';
+		num /= 10;
 	}
 	if (n < 0)
-	{
-		write(fd, "-", 1);
-		n = -n;
-	}
-	if (n >= 10)
-	{
-		ft_putnbr_fd(n / 10, fd);
-	}
-	c = (n % 10) + '0';
-	write(fd, &c, 1);
+		str[0] = '-';
+	return (str);
 }

@@ -6,22 +6,21 @@
 /*   By: begiovan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:07:35 by begiovan          #+#    #+#             */
-/*   Updated: 2024/12/10 12:17:56 by begiovan         ###   ########.fr       */
+/*   Updated: 2024/12/23 18:43:56 by begiovan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+#include <stddef.h>
 
-#include <stdio.h>
-#include <string.h>
-
-char	*ft_strchr(char *c, int i)
+char	*ft_strchr(const char *str, int i)
 {
-	while(*c)
+	while (*str)
 	{
-		if(*c == i)
-			return(c);
-		c++;
+		if (*str == (char) i)
+			return ((char *) str);
+		str++;
 	}
-	if(*c == '\0')
-		return(c);
-	return(0);
+	if (*str == '\0' && (char) i == '\0')
+		return ((char *) str);
+	return (NULL);
 }

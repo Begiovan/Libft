@@ -9,31 +9,26 @@
 /*   Updated: 2024/12/14 04:53:23 by begiovan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
+#include <stdlib.h>
 
 char	*ft_strnstr(const char *str1, const char *str2, size_t n)
 {
-	while(*str1 != '\0' && n > 0)
+	size_t	i;
+
+	if (*str2 == '\0')
+		return ((char *)str1);
+	while (*str1 != '\0' && n > 0)
 	{
-		while((*str1 != '\0' && *str2 != '\0') &&
-					(*str1 == *str2) && n >= 0)
+		i = 0;
+		while (str1[i] == str2[i] && str2[i] != '\0' && i < n)
 		{
-			str1++;
-			str2++;
-			n--;
+			i++;
 		}
-		if(*str2 == '\0')
-		{
-			return((char *)str1);
-		}
+		if (str2[i] == '\0')
+			return ((char *)str1);
 		str1++;
 		n--;
 	}
-	if(!*str2)
-	{
-		return((char *)str1);
-	}
-	return(NULL);
+	return (NULL);
 }
